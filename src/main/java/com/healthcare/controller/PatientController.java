@@ -23,14 +23,20 @@ public class PatientController {
     }
 
     @GetMapping("patient/{id}")
-    Optional<String> getPatient(@PathVariable Integer id){
+    Optional<Patient> getPatient(@PathVariable Integer id){
        Optional<Patient> patient = eHealthCareRepository.findById(id);
-       return patient.map(p -> p.getFirstName());
+       return patient;
+       //return patient.map(p -> p.getFirstName());
     }
     
  
     @RequestMapping(method = RequestMethod.POST, value = "patients")
     public void createNewAddress(@RequestBody Patient patient) {
+    	try {
          eHealthCareRepository.save(patient);
+    	}
+    	catch(Exception e) {
+    		throw e;
+    	}
     }
 }

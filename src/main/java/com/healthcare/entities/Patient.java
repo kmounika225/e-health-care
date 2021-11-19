@@ -1,9 +1,12 @@
 package com.healthcare.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -16,26 +19,53 @@ public class Patient {
     public Integer id;
     public String firstName;
     public String lastName;
-    public Integer mobileNumber;
+   
+
+	public Integer mobileNumber;
     public String address;
     public String email;
-    public String userId;
+    //public Integer userId;
     public String gender;
 
     public Patient() {
     }
 
-    public Patient(Integer id, String firstName, String lastName, Integer mobileNumber, String address, String email, String userId, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobileNumber = mobileNumber;
-        this.address = address;
-        this.email = email;
-        this.userId = userId;
-        this.gender = gender;
-    }
+    
+   
 
+
+
+
+	public Patient(String firstName, String lastName, Integer mobileNumber, String address, String email, String gender,
+			User user) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileNumber = mobileNumber;
+		this.address = address;
+		this.email = email;
+		this.gender = gender;
+		this.user = user;
+	}
+
+
+
+
+
+
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+    
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
     public Integer getId() {
         return id;
     }
@@ -84,13 +114,13 @@ public class Patient {
         this.email = email;
     }
 
-    public String getUserId() {
+    /*public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
-    }
+    }*/
 
     public String getGender() {
         return gender;
@@ -109,7 +139,6 @@ public class Patient {
                 ", mobileNumber=" + mobileNumber +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
-                ", userId='" + userId + '\'' +
                 ", gender='" + gender + '\'' +
                 '}';
     }

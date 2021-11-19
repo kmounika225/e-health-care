@@ -2,6 +2,8 @@ package com.healthcare.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -10,6 +12,7 @@ import javax.persistence.OneToOne;
 public class Doctor {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String doctor_name;
 	private String mobile_number;
@@ -17,34 +20,62 @@ public class Doctor {
 	private String address;
 	private String gender;
 	private String specialization;
-    private int userId;
 
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 	
 
-	public Doctor(int doctor_Id, String doctor_name, String mobile_number, String email_id, String address,
-			String gender, String specialization, int user_id) {
+	
+
+	
+
+
+
+	public Doctor() {
 		super();
-		this.id = doctor_Id;
+	}
+
+
+
+	public Doctor(String doctor_name, String mobile_number, String email_id, String address, String gender,
+			String specialization, User user) {
+		super();
 		this.doctor_name = doctor_name;
 		this.mobile_number = mobile_number;
 		this.email_id = email_id;
 		this.address = address;
 		this.gender = gender;
 		this.specialization = specialization;
-		this.userId = user_id;
+		this.user = user;
 	}
 
-	public int getDoctor_Id() {
+
+
+	public int getId() {
 		return id;
 	}
 
-	public void setDoctor_Id(int doctor_Id) {
-		this.id = doctor_Id;
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 
 	public String getDoctor_name() {
 		return doctor_name;
@@ -94,12 +125,6 @@ public class Doctor {
 		this.specialization = specialization;
 	}
 
-	public int getUser_id() {
-		return userId;
-	}
-
-	public void setUser_id(int user_id) {
-		this.userId = user_id;
-	}
+	
 
 }
