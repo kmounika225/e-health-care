@@ -23,13 +23,13 @@ public class UserController {
     }
 
     @GetMapping("user/")
-    List<User> getPatient(){
+    List<User> getUser(){
     	return userRepository.findAll();
     
     }
     
     @GetMapping("user/{id}")
-    Optional<User> getPatient(@PathVariable Integer id){
+    Optional<User> getUser(@PathVariable Integer id){
     	return userRepository.findById(id);
     
     }

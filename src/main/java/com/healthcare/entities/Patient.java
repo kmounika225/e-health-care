@@ -2,6 +2,7 @@ package com.healthcare.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,9 +31,6 @@ public class Patient {
     public Patient() {
     }
 
-    
-   
-
 
 
 
@@ -50,12 +48,8 @@ public class Patient {
 
 
 
-
-
-
-
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     
     public User getUser() {

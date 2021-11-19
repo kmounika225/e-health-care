@@ -24,13 +24,13 @@ public class DoctorController {
     }
 
     @GetMapping("doctor/")
-    List<Doctor> getPatient(){
+    List<Doctor> getDoctor(){
     	return doctorRepository.findAll();
     
     }
     
     @GetMapping("doctor/{id}")
-    Optional<Doctor> getPatient(@PathVariable Integer id){
+    Optional<Doctor> getDoctorID(@PathVariable Integer id){
     	return doctorRepository.findById(id);
     
     }
