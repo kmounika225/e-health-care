@@ -1,6 +1,8 @@
 package com.healthcare.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,15 +20,20 @@ public class User {
 	private String role;
 	private String password;
 
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
+    cascade = CascadeType.ALL)
 	private Doctor doctor;
 
-	@OneToOne(mappedBy = "user")
+	
+
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
+	            cascade = CascadeType.ALL)
 	private Patient patient;
 
-
-
-
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	private Admin admin;
+	
 	public User() {
 		super();
 	}
@@ -69,13 +76,9 @@ public class User {
 		return patient;
 	}
 
-
-
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-
-
 
 	public String getRole() {
 		return role;
