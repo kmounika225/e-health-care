@@ -1,5 +1,7 @@
 package com.healthcare.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,10 +33,7 @@ public class Patient {
 
     public Patient() {
     }
-
-
-
-
+    
 	public Patient(String firstName, String lastName, Integer mobileNumber, String address, String email, String gender,
 			User user) {
 		super();
@@ -46,11 +46,12 @@ public class Patient {
 		this.user = user;
 	}
 
-
-
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+	
+	@OneToMany(mappedBy = "patient")
+	private List<Payment> payments;
     
     public User getUser() {
 		return user;

@@ -27,10 +27,6 @@ public class Doctor {
     private User user;
 	
 
-	
-
-	
-
 
 
 	public Doctor() {
