@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity(name = "Patient")
 @Table(name = "patient")
@@ -50,9 +53,10 @@ public class Patient {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 	
-	@OneToMany(mappedBy = "patient")
+	/*@OneToMany(mappedBy = "patient")
 	private List<Payment> payments;
-    
+    */
+	@JsonBackReference
     public User getUser() {
 		return user;
 	}

@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -71,7 +74,7 @@ public class User {
 	}
 
 
-
+    @JsonManagedReference
 	public Patient getPatient() {
 		return patient;
 	}

@@ -1,5 +1,6 @@
 package com.healthcare.controller;
 
+import com.healthcare.entities.Doctor;
 import com.healthcare.entities.Patient;
 import com.healthcare.repository.EHealthCareRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/")
@@ -27,6 +29,12 @@ public class PatientController {
        Optional<Patient> patient = eHealthCareRepository.findById(id);
        return patient;
        //return patient.map(p -> p.getFirstName());
+    }
+    
+    @GetMapping("patients")
+    List<Patient> getPatients(){
+    	return eHealthCareRepository.findAll();
+    
     }
     
  
