@@ -8,7 +8,6 @@ public class EHealthCareApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EHealthCareApplication.class, args);
-		System.out.println("djfd");
 	}
 
 }

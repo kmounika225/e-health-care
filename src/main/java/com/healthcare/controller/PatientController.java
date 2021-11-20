@@ -1,14 +1,13 @@
 package com.healthcare.controller;
 
 import com.healthcare.entities.Patient;
-import com.healthcare.repository.EHealthCareRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.healthcare.entities.User;
+import com.healthcare.services.PatientService;
+import com.healthcare.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -16,21 +15,30 @@ import java.util.Optional;
 @RestController
 public class PatientController {
 
-    EHealthCareRepository eHealthCareRepository;
+    @Autowired
+    PatientService patientService;
+    @Autowired
+    UserService userService;
 
-    public PatientController(EHealthCareRepository eHealthCareRepository) {
-        this.eHealthCareRepository = eHealthCareRepository;
+    @GetMapping("patient/{patientId}")
+    ResponseEntity<Optional<Patient>> getPatient(@PathVariable Integer patientId){
+       Optional<Patient> patient = patientService.getByPatientId(patientId);
+       if (patient.isPresent()){
+           return ResponseEntity.status(HttpStatus.OK).body(patient);
+       }else {
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       }
     }
 
-    @GetMapping("patient/{id}")
-    Optional<String> getPatient(@PathVariable Integer id){
-       Optional<Patient> patient = eHealthCareRepository.findById(id);
-       return patient.map(p -> p.getFirstName());
+    @PostMapping("create/patient")
+    ResponseEntity<String> createNewUser(@RequestBody Patient patient) {
+        patientService.savePatient(patient);
+        return ResponseEntity.status(HttpStatus.OK).body("Patient created successfully");
     }
-    
- 
-    @RequestMapping(method = RequestMethod.POST, value = "patients")
-    public void createNewAddress(@RequestBody Patient patient) {
-         eHealthCareRepository.save(patient);
+
+    @PostMapping("create/user")
+    ResponseEntity<String> createNewUser(@RequestBody User user) {
+         userService.saveUser(user);
+         return ResponseEntity.status(HttpStatus.OK).body("User created successfully");
     }
 }

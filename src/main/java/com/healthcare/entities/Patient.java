@@ -1,39 +1,35 @@
 package com.healthcare.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
-@Entity(name = "Patient")
-@Table(name = "patient")
+@Entity
 public class Patient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public Integer id;
-    public String firstName;
-    public String lastName;
-    public Integer mobileNumber;
-    public String address;
-    public String email;
-    public String userId;
-    public String gender;
-
+    private Integer id;
+    private String firstName;
+    private String lastName;
+    private Integer mobileNumber;
+    private String address;
+    private String email;
+    private String gender;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
     public Patient() {
     }
 
-    public Patient(Integer id, String firstName, String lastName, Integer mobileNumber, String address, String email, String userId, String gender) {
+    public Patient(Integer id, String firstName, String lastName, Integer mobileNumber, String address,
+                   String email, String gender, User user) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.mobileNumber = mobileNumber;
         this.address = address;
         this.email = email;
-        this.userId = userId;
         this.gender = gender;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -84,14 +80,6 @@ public class Patient {
         this.email = email;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -100,17 +88,12 @@ public class Patient {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", mobileNumber=" + mobileNumber +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", userId='" + userId + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
+    public User getUser() {
+        return user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
