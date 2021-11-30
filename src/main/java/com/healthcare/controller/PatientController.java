@@ -3,6 +3,8 @@ package com.healthcare.controller;
 import com.healthcare.entities.Doctor;
 import com.healthcare.entities.Patient;
 import com.healthcare.repository.EHealthCareRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import java.util.Optional;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class PatientController {
 
     EHealthCareRepository eHealthCareRepository;

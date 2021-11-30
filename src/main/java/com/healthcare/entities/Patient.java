@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -28,7 +29,7 @@ public class Patient {
     public String lastName;
    
 
-	public Integer mobileNumber;
+	public String mobileNumber;
     public String address;
     public String email;
     //public Integer userId;
@@ -37,7 +38,7 @@ public class Patient {
     public Patient() {
     }
     
-	public Patient(String firstName, String lastName, Integer mobileNumber, String address, String email, String gender,
+	public Patient(String firstName, String lastName, String mobileNumber, String address, String email, String gender,
 			User user) {
 		super();
 		this.firstName = firstName;
@@ -48,7 +49,8 @@ public class Patient {
 		this.gender = gender;
 		this.user = user;
 	}
-
+    
+	
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -89,11 +91,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Integer getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(Integer mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
