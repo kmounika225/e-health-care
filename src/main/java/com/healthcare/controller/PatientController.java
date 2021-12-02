@@ -41,8 +41,8 @@ public class PatientController {
     }
     
  
-    @RequestMapping(method = RequestMethod.POST, value = "patients")
-    public void createNewAddress(@RequestBody Patient patient) {
+    @RequestMapping(method = RequestMethod.POST, value = "patient")
+    public void createPatient(@RequestBody Patient patient) {
     	try {
          eHealthCareRepository.save(patient);
     	}
