@@ -1,10 +1,21 @@
 package com.healthcare.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity(name = "Patient")
@@ -16,26 +27,46 @@ public class Patient {
     public Integer id;
     public String firstName;
     public String lastName;
-    public Integer mobileNumber;
+   
+
+	public String mobileNumber;
     public String address;
     public String email;
-    public String userId;
+    //public Integer userId;
     public String gender;
 
     public Patient() {
     }
+    
+	public Patient(String firstName, String lastName, String mobileNumber, String address, String email, String gender,
+			User user) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobileNumber = mobileNumber;
+		this.address = address;
+		this.email = email;
+		this.gender = gender;
+		this.user = user;
+	}
+    
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+	
+	/*@OneToMany(mappedBy = "patient")
+	private List<Payment> payments;
+    */
+	@JsonBackReference
+    public User getUser() {
+		return user;
+	}
 
-    public Patient(Integer id, String firstName, String lastName, Integer mobileNumber, String address, String email, String userId, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mobileNumber = mobileNumber;
-        this.address = address;
-        this.email = email;
-        this.userId = userId;
-        this.gender = gender;
-    }
-
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
     public Integer getId() {
         return id;
     }
@@ -60,11 +91,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Integer getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(Integer mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 
@@ -84,13 +115,13 @@ public class Patient {
         this.email = email;
     }
 
-    public String getUserId() {
+    /*public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
-    }
+    }*/
 
     public String getGender() {
         return gender;
@@ -109,7 +140,6 @@ public class Patient {
                 ", mobileNumber=" + mobileNumber +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
-                ", userId='" + userId + '\'' +
                 ", gender='" + gender + '\'' +
                 '}';
     }
