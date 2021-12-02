@@ -3,27 +3,24 @@ package com.healthcare.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "appointment_details")
-public class Appointment {
+@Table(name = "diagnostics_details")
+public class Diagnostics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-   // @Column(name = "patient_id")
+    private String testName;
     private Integer patientId;
-   // @Column(name = "doctor_id")
     private Integer doctorId;
-   // @Column(name = "appointment_date")
-    private String appointmentDate;
 
-    public Appointment() {
+    public Diagnostics() {
     }
 
-    public Appointment(Integer id, Integer patientId, Integer doctorId, String appointmentDate) {
+    public Diagnostics(Integer id, String testName, Integer patientId, Integer doctorId) {
         this.id = id;
+        this.testName = testName;
         this.patientId = patientId;
         this.doctorId = doctorId;
-        this.appointmentDate = appointmentDate;
     }
 
     public Integer getId() {
@@ -32,6 +29,14 @@ public class Appointment {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
     public Integer getPatientId() {
@@ -48,13 +53,5 @@ public class Appointment {
 
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
-    }
-
-    public String getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(String appointmentDate) {
-        this.appointmentDate = appointmentDate;
     }
 }

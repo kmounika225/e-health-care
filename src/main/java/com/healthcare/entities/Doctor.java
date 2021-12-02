@@ -2,11 +2,14 @@ package com.healthcare.entities;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Doctor {
@@ -22,9 +25,11 @@ public class Doctor {
 	private String specialization;
 
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+	
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 	
 
 
@@ -60,7 +65,7 @@ public class Doctor {
 	}
 
 
-
+	@JsonBackReference
 	public User getUser() {
 		return user;
 	}
