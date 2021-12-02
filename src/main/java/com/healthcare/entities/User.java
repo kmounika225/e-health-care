@@ -25,6 +25,7 @@ public class User {
 	
 	private String role;
 	private String password;
+	public String email;
 
 	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
     cascade = CascadeType.ALL)
@@ -46,10 +47,23 @@ public class User {
 
 
 
-	public User(String role, String password) {
+	public User(String role, String password,String email) {
 		super();
 		this.role = role;
 		this.password = password;
+		this.email = email;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
