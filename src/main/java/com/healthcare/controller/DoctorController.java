@@ -2,6 +2,8 @@ package com.healthcare.controller;
 
 import com.healthcare.entities.Doctor;
 import com.healthcare.repository.DoctorRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class DoctorController {
 
     DoctorRepository doctorRepository;
@@ -23,7 +26,7 @@ public class DoctorController {
         this.doctorRepository = doctorRepository;
     }
 
-    @GetMapping("doctor/")
+    @GetMapping("doctor")
     List<Doctor> getDoctor(){
     	return doctorRepository.findAll();
     
