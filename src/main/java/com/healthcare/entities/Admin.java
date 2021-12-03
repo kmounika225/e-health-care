@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Admin {
 
@@ -79,6 +81,7 @@ public class Admin {
 		this.gender = gender;
 	}
 
+	@JsonBackReference
 	public User getUser() {
 		return user;
 	}

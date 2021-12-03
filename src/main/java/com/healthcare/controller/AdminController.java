@@ -1,9 +1,12 @@
 package com.healthcare.controller;
 
 import com.healthcare.entities.Admin;
+import com.healthcare.entities.Doctor;
 import com.healthcare.entities.Patient;
 import com.healthcare.repository.AdminRepository;
 import com.healthcare.repository.EHealthCareRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import java.util.Optional;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class AdminController {
 
 	AdminRepository adminRepository;
@@ -30,6 +34,10 @@ public class AdminController {
        return admin;
     }
     
+    @GetMapping("adminByUser/{id}")
+    Optional<Admin> getAdminByUserId(@PathVariable Integer id){
+    	return adminRepository.findByuserId(id);
+    }
  
     @RequestMapping(method = RequestMethod.POST, value = "admins")
     public void createNewAddress(@RequestBody Admin admin) {

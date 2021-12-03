@@ -1,6 +1,7 @@
 package com.healthcare.controller;
 
 import com.healthcare.entities.Doctor;
+import com.healthcare.entities.Patient;
 import com.healthcare.repository.DoctorRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,10 @@ public class DoctorController {
     Optional<Doctor> getDoctorID(@PathVariable Integer id){
     	return doctorRepository.findById(id);
     
+    }
+    @GetMapping("doctorByUser/{id}")
+    Optional<Doctor> getDoctorByUserId(@PathVariable Integer id){
+    	return doctorRepository.findByuserId(id);
     }
     
  
