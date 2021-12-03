@@ -2,6 +2,8 @@ package com.healthcare.controller;
 
 import com.healthcare.entities.User;
 import com.healthcare.repository.UserRepository;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import java.util.Optional;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class UserController {
 
     UserRepository userRepository;
@@ -34,9 +37,17 @@ public class UserController {
     
     }
     
+    @GetMapping("user/{email}/{password}")
+    Optional<User> getUserByMailPassword(@PathVariable String email,@PathVariable String password){
+    	List<User> u= userRepository.findUserByemailAndPassword(email,password);
+    	return u.stream().findFirst();
+    
+    }
+    
  
     @RequestMapping(method = RequestMethod.POST, value = "user")
-    public void addUser(@RequestBody User user) {
-    	userRepository.save(user);
+    public User addUser(@RequestBody User user) {
+    	return userRepository.save(user);
+    	
     }
 }

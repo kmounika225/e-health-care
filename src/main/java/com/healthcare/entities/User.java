@@ -31,8 +31,6 @@ public class User {
     cascade = CascadeType.ALL)
 	private Doctor doctor;
 
-	
-
 	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY,
 	            cascade = CascadeType.ALL)
 	private Patient patient;
