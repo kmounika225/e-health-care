@@ -13,16 +13,19 @@ public class Prescription {
     private Integer patientId;
    // @Column(name = "doctor_id")
     private Integer doctorId; 
+    
+    private String medicalCondition;
  
     
 
     public Prescription() {
     }
 
-    public Prescription(Integer id, Integer patientId, Integer doctorId) {
+    public Prescription(Integer id, Integer patientId, Integer doctorId, String medicalCondition) {
         this.id = id;
         this.patientId = patientId;
         this.doctorId = doctorId;
+        this.medicalCondition = medicalCondition;
     }
 
     public Integer getId() {
@@ -33,7 +36,15 @@ public class Prescription {
         this.id = id;
     }
 
-    public Integer getPatientId() {
+    public String getMedicalCondition() {
+		return medicalCondition;
+	}
+
+	public void setMedicalCondition(String medicalCondition) {
+		this.medicalCondition = medicalCondition;
+	}
+
+	public Integer getPatientId() {
         return patientId;
     }
 
