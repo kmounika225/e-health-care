@@ -15,15 +15,16 @@ public class Appointment {
     private Integer doctorId;
    // @Column(name = "appointment_date")
     private String appointmentDate;
-
+    private String appointmentTime;
     public Appointment() {
     }
 
-    public Appointment(Integer id, Integer patientId, Integer doctorId, String appointmentDate) {
+    public Appointment(Integer id, Integer patientId, Integer doctorId, String appointmentDate, String appointmentTime) {
         this.id = id;
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.appointmentDate = appointmentDate;
+        this.appointmentTime= appointmentTime;
     }
 
     public Integer getId() {
@@ -57,4 +58,14 @@ public class Appointment {
     public void setAppointmentDate(String appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
+
+	public String getAppointmentTime() {
+		return appointmentTime;
+	}
+
+	public void setAppointmentTime(String appointmentTime) {
+		this.appointmentTime = appointmentTime;
+	}
+    
+    
 }
