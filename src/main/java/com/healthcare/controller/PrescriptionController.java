@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class PrescriptionController {
 
     @Autowired
@@ -49,8 +50,8 @@ public class PrescriptionController {
     }
     
     @PostMapping("prescription")
-    public ResponseEntity<String> createPrescription(@RequestBody Prescription prescription){
-        prescriptionRepository.save(prescription);
-        return new ResponseEntity<String>("prescription created Successfully", HttpStatus.OK);
+    public Prescription createPrescription(@RequestBody Prescription prescription){
+       return  prescriptionRepository.save(prescription);
+       // return new ResponseEntity<String>("prescription created Successfully", HttpStatus.OK);
     } 
 }

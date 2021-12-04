@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @RestController
+@CrossOrigin
 public class PrescriptionDetailsController {
 
     @Autowired
